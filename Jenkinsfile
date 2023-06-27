@@ -6,16 +6,16 @@ node ('Ubuntu-app-agent'){
 	stage ('Biuld-and-Tag') {
 			app = docker.build("moin4hackdockhub/snake:new")
 		}
-        /*stage ('POST-tO-Dockerhub') {
+        stage ('POST-tO-Dockerhub') {
 			docker.withRegistry('https://registry.hub.docker.com', 'moin4hackdockhub'){
 				app.push("latest")
 			}
-	}*/
-	 stage('Push image') {
+	}
+	/* stage('Push image') {
            withDockerRegistry([ credentialsId: "moin4hackdockhub", url: "" ]) {
              dockerImage.push()
             }
-         }
+         }*/
 	 stage ('Pull-image-from-docker') {
 			sh 'docker-compose down'
 		 	sh 'docker-compose up -d'
