@@ -4,7 +4,7 @@ node ('Ubuntu-app-agent'){
 			checkout scm
 		}
 	stage ('Biuld-and-Tag') {
-			app = docker.build("moin4hackdockhub/snake")
+			app = docker.build("moin4hackdockhub/snake:new")
 		}
         stage ('POST-tO-Dockerhub') {
 			docker.withRegistry('https://registry.hub.docker.com', 'moin4hackdockhub'){
