@@ -1,20 +1,19 @@
 node ('Ubuntu-app-agent'){
+	def app
         stage ('Clone from GIT') {
-			sh 'echo Clone from GIT'
+			checkout scm
 		}
-	stage ('SCA') {
-			sh 'echo SCA'
+	stage ('Biuld-and-Tag') {
+			app = docker.build("moin4hackdockhub/snake")
 		}
-        stage ('SAST') {
-			sh 'echo SAST'
+        stage ('POST-tO-Dockerhub') {
+			docker.withRegistry('https://registry.hub.docker.com', 'moin4hackdockhub'){
+				app.push("latest")
+			}
 	}
-	 stage ('BUILD') {
-			sh 'echo BUILD'
+	 stage ('Pull-image-from-docker') {
+			sh 'docker-compose down'
+		 	sh 'docker-compose up -d'
 	}
-        stage ('DEPLOY') {
-			sh 'echo DEPLOY'
-	}
-        stage ('DAST') {
-			sh 'echo DAST'
-	}
+        
 }
