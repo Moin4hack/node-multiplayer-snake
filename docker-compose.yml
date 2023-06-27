@@ -1,7 +1,7 @@
-version: '3.3'
+version: '2'
 services:
   snake:
-    image: 'amrit96/snake'
+    image: 'moin4hackdockhub/snake:new'
     environment:
       - "PORT:3000"
     ports:
